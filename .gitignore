@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+data/
+static/thumbnails/
+.DS_Store
+.vercel/
+glm/

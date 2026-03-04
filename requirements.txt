@@ -1,0 +1,15 @@
+flask
+anthropic
+python-dotenv
+flask-cors
+beautifulsoup4
+requests
+PyMuPDF
+supabase
+PyJWT[crypto]
+youtube-transcript-api
+openai
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+gunicorn
