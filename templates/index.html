@@ -2846,7 +2846,7 @@ async function scoreQuestionsWithAI() {
     return;
   }
 
-  const unscoredQuestions = loadedQuestions.filter(q => q.score === null || q.score === 0);
+  const unscoredQuestions = loadedQuestions.filter(q => q.score === null);
   
   const title = "採点対象の選択";
   let bodyHtml = "";
@@ -2889,7 +2889,7 @@ async function executeScoring(mode) {
   
   let allTargets = [];
   if (mode === 'unscored') {
-    allTargets = loadedQuestions.filter(q => q.score === null || q.score === 0);
+    allTargets = loadedQuestions.filter(q => q.score === null);
   } else {
     allTargets = [...loadedQuestions];
   }

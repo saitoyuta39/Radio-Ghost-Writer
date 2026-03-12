@@ -1139,7 +1139,9 @@ def get_questions():
                 continue
             
             def get_val(idx):
-                return row[idx].strip() if len(row) > idx and row[idx] else ""
+                if len(row) > idx and row[idx] is not None and str(row[idx]).strip() != "":
+                    return str(row[idx]).strip()
+                return ""
             
             date_str = get_val(date_idx)
             question_text = get_val(question_idx)
@@ -1153,7 +1155,8 @@ def get_questions():
             score = None
             if score_str:
                 try:
-                    score = int(score_str)
+                    # 整数または浮動小数点形式の文字列を整数に変換
+                    score = int(float(score_str))
                 except ValueError:
                     pass
             
@@ -1202,7 +1205,7 @@ def get_questions():
 @app.route("/api/questions/score", methods=["POST"])
 @require_auth
 def score_questions():
-    """GPT-4o-miniで質問を一括採点する"""
+    """o3-miniで質問を一括採点する"""
     data = request.json
     questions = data.get("questions", [])
     
@@ -1221,12 +1224,11 @@ def score_questions():
     
     try:
         response = openai_client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o3-mini",
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "developer", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=0.3,
             response_format={"type": "json_object"}
         )
         
